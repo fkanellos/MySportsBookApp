@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:background="@color/richBlack">
+
+    <RelativeLayout
+        android:id="@+id/topLayout"
+        style="@style/toggleArrow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_top_10"
+        android:layout_marginVertical="@dimen/margin_top_4"
+        android:background="@color/richBlack"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/favorite_icon_width"
+            android:layout_height="@dimen/favorite_icon_width"
+            android:layout_centerVertical="true"
+            tools:background="@drawable/football_icon" />
+
+        <TextView
+            android:id="@+id/sportTextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_top_4"
+            android:layout_toEndOf="@id/icon"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_18"
+            tools:text="@string/app_name" />
+
+        <ToggleButton
+            android:id="@+id/arrowToggle"
+            style="@style/toggleArrow"
+            android:layout_width="@dimen/toggle_width"
+            android:layout_height="@dimen/toggle_width"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/arrow_selector_icon"
+            android:checked="false" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topLayout"
+        android:background="@color/black">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/horizontalRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Sports Book App</string>
+    <string name="soccer">SOCCER</string>
+    <string name="basketball">BASKETBALL</string>
+    <string name="tennis">TENNIS</string>
+    <string name="table_tennis">TABLE TENNIS</string>
+    <string name="volleyball">VOLLEYBALL</string>
+    <string name="esports">ESPORTS</string>
+    <string name="ice_hockey">ICE HOCKEY</string>
+    <string name="handball">HANDBALL</string>
+    <string name="beach_volleyball">BEACH VOLLEYBALL</string>
+    <string name="snooker">SNOOKER</string>
+    <string name="badminton">BADMINTON</string>
+    <string name="formatted_time">%02d:%02d:%02d</string>
+    <string name="networkError">Unknown Error</string>
+    <string name="profile">User Profile</string>
+    <string name="settings">Settings</string>
+</resources>
