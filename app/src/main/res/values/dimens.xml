@@ -6,7 +6,7 @@
     <dimen name="padding_4">4dp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="margin_top_10">10dp</dimen>
-    <dimen name="favorite_icon_width">24dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="margin_top_4">4dp</dimen>
     <dimen name="toggle_width">32dp</dimen>

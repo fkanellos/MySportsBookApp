@@ -12,8 +12,7 @@ import kotlinx.android.synthetic.main.group_item.view.*
 
 class VerticalScrollAdapter :
     RecyclerView.Adapter<VerticalScrollAdapter.VerticalViewHolder>() {
-
-    private var data: List<SportsTitleViewModel> = mutableListOf()
+    var data: List<SportsTitleViewModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VerticalViewHolder {
         val inflater =
@@ -42,21 +41,20 @@ class VerticalScrollAdapter :
         private var recyclerView = view.horizontalRecycler
 
         fun bind(data: SportsTitleViewModel) {
-            //hide view for games when app open
-            relativeLayout.visibility = View.GONE
-            toggleButton.isChecked
+            /* set toggleButton checked so the drop down list is open */
+            toggleButton.isChecked = true
 
-            //sports categories
+            /* set sports categories */
             sportTextureView.text = data.sport
 
-            //sports images
+            /* set sports drawables */
             imageViewIcon.background = view.context?.let {
                 data.sport?.let { it1 ->
                     Utils.fetchDrawable(it1, it)
                 }
             }
 
-            //hide and show view for games
+            /* hide and show view for games */
             toggleButton.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     relativeLayout.visibility = View.VISIBLE
@@ -65,15 +63,13 @@ class VerticalScrollAdapter :
                 }
             }
 
-            //set horizontal adapter for games
+            /* set horizontal adapter for games */
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 val horizontalRecyclerViewAdapter =
                     HorizontalScrollAdapter(data.sportsDetailsViewModel)
                 adapter = horizontalRecyclerViewAdapter
-
             }
-
         }
     }
 }

@@ -25,7 +25,7 @@ constructor() : ViewModel() {
     init {
         viewModelScope.launch {
             val response = try {
-                RetrofitInstance.api.getTodos()
+                RetrofitInstance.apiService.getApiResponse()
             } catch (e: IOException) {
                 Log.e(TAG, "IOException, you might not have internet connection")
                 return@launch
@@ -42,23 +42,28 @@ constructor() : ViewModel() {
         }
     }
 
-    fun prepareDataForExpandableAdapter(value: List<SportsResponseItem>): List<SportsTitleViewModel> {
-        val result: MutableList<SportsTitleViewModel> = mutableListOf()
+    /* set tha values inside the expandable item
+    * @titleRow -> the sport value
+    * @teamsDetailsRow -> the rival teams and time start */
+    fun setValuesForExpandableAdapter(value: List<SportsResponseItem>): List<SportsTitleViewModel> {
+        val sportsResult: MutableList<SportsTitleViewModel> = mutableListOf()
 
         value.forEach {
-            val parentRow = SportsTitleViewModel()
-            parentRow.sport = it.d
+            val titleRow = SportsTitleViewModel()
+            titleRow.sport = it.d
             val gamesList: MutableList<SportsDetailsViewModel> = mutableListOf()
             it.e.forEach { child ->
-                val childRow = SportsDetailsViewModel()
-                childRow.timeStart = child.eventStartingTime
-                childRow.team1 = Utils.splitStringAndReturn(child.gameInfo, 2, Regex("-"), 0)
-                childRow.team2 = Utils.splitStringAndReturn(child.gameInfo, 2, Regex("-"), 1)
-                gamesList.add(childRow)
+                val teamDetailsRow = SportsDetailsViewModel()
+                teamDetailsRow.timeStart = child.eventStartingTime
+                teamDetailsRow.firstTeam =
+                    Utils.splitStringAndReturn(child.gameInfo, 2, Regex("-"), 0)
+                teamDetailsRow.secondTeam =
+                    Utils.splitStringAndReturn(child.gameInfo, 2, Regex("-"), 1)
+                gamesList.add(teamDetailsRow)
             }
-            parentRow.sportsDetailsViewModel = gamesList
-            result.add(parentRow)
+            titleRow.sportsDetailsViewModel = gamesList
+            sportsResult.add(titleRow)
         }
-        return result
+        return sportsResult
     }
 }
