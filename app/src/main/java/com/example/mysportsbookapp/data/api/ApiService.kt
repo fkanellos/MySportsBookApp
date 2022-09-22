@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("sports")
-    suspend fun getTodos(): Response<List<SportsResponseItem>>
+    suspend fun getApiResponse(): Response<List<SportsResponseItem>>
 }

@@ -18,7 +18,7 @@ class HorizontalScrollAdapter(
 ) :
     RecyclerView.Adapter<HorizontalScrollAdapter.HorizontalViewHolder>() {
 
-    //High-order function for favourite toggle
+    /* Handle the click button for favourite teams to appear first */
     private var onToggleButtonClicked: ((Boolean, Int) -> Unit) = { isChecked: Boolean, i: Int ->
         this.sportsDetailsViewModel[i].favourite = isChecked
         this.sportsDetailsViewModel.sortByDescending { it.favourite }
@@ -29,23 +29,23 @@ class HorizontalScrollAdapter(
         view: View,
         private var onToggleButtonClicked: (Boolean, Int) -> Unit,
     ) : RecyclerView.ViewHolder(view) {
-        private var toggleButton = view.favouriteBtn
-        private var textViewTeam1 = view.textView1
-        private var textViewTeam2 = view.textView2
-        var countdownTextureView = view.countdown
+        private var dropDownBtn = view.favouriteBtn
+        private var firstTeamTextview = view.textView1
+        private var secondTeamTextview = view.textView2
+        var countdownView = view.countdown
         var countDownTimer: CountDownTimer? = null
 
         fun bind(data: SportsDetailsViewModel) {
             //set info for games
-            textViewTeam1.text = data.team1
-            textViewTeam2.text = data.team2
+            firstTeamTextview.text = data.firstTeam
+            secondTeamTextview.text = data.secondTeam
 
             //favourite icon
-            toggleButton.setOnCheckedChangeListener(null)
-            toggleButton.isChecked = data.favourite
+            dropDownBtn.setOnCheckedChangeListener(null)
+            dropDownBtn.isChecked = data.favourite
 
 
-            toggleButton.setOnCheckedChangeListener { _, isChecked ->
+            dropDownBtn.setOnCheckedChangeListener { _, isChecked ->
                 data.favourite = isChecked
                 //use High-order function
                 onToggleButtonClicked.invoke(isChecked, adapterPosition)
@@ -63,7 +63,7 @@ class HorizontalScrollAdapter(
 
         holder.countDownTimer?.cancel()
         holder.countDownTimer = startTimer(
-            holder.countdownTextureView,
+            holder.countdownView,
             sportsDetailsViewModel[position],
             holder.itemView.context
         ).start()
@@ -75,7 +75,7 @@ class HorizontalScrollAdapter(
         return sportsDetailsViewModel.size
     }
 
-    //countDown function
+    /* create the countDown function */
     private fun startTimer(
         countdownTextureView: TextView,
         data: SportsDetailsViewModel,
@@ -83,8 +83,8 @@ class HorizontalScrollAdapter(
     ): CountDownTimer {
 
         val timeOfEventMillis: Long? =
-            data.timeStart?.times(Constants.CHANGE_TO_MILLIS)
-        return object : CountDownTimer(timeOfEventMillis!!, Constants.MILLIS_TO_SEC) {
+            data.timeStart?.times(Constants.TIME_TO_MS)
+        return object : CountDownTimer(timeOfEventMillis!!, Constants.MS_TO_SEC) {
 
             override fun onTick(millisUntilFinished: Long) {
                 countdownTextureView.text = context?.getString(
@@ -93,11 +93,11 @@ class HorizontalScrollAdapter(
                     TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60,
                     TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60
                 )
-                data.timeStart = millisUntilFinished.div(Constants.CHANGE_TO_MILLIS)
+                data.timeStart = millisUntilFinished.div(Constants.TIME_TO_MS)
             }
 
             override fun onFinish() {
-                //no documentation
+                //no documentation for this action
             }
         }
     }

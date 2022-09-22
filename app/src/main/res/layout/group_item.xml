@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="@dimen/favorite_icon_width"
-            android:layout_height="@dimen/favorite_icon_width"
+            android:layout_width="@dimen/margin_24dp"
+            android:layout_height="@dimen/margin_24dp"
             android:layout_centerVertical="true"
             tools:background="@drawable/football_icon" />
 
@@ -34,16 +34,28 @@
             android:textSize="@dimen/text_size_18"
             tools:text="@string/app_name" />
 
-        <ToggleButton
-            android:id="@+id/arrowToggle"
-            style="@style/toggleArrow"
-            android:layout_width="@dimen/toggle_width"
-            android:layout_height="@dimen/toggle_width"
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/arrow_selector_icon"
-            android:checked="false" />
+            android:layout_centerVertical="true">
+            <ToggleButton
+                android:id="@+id/arrowToggle"
+                style="@style/toggleArrow"
+                android:layout_width="@dimen/toggle_width"
+                android:layout_height="@dimen/toggle_width"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/arrow_selector_icon"
+                android:checked="false" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_drag_handle"
+                android:layout_marginEnd="@dimen/margin_top_10"/>
+        </LinearLayout>
 
     </RelativeLayout>
 
